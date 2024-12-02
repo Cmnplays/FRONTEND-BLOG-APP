@@ -5,7 +5,8 @@ import appwriteServices from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const PostForm = ({ post }) => {
-  const { register, handleSubmit, setValue, watch, control, getValues } =
+  console.log(post);
+  const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
@@ -14,6 +15,19 @@ const PostForm = ({ post }) => {
         status: post?.status || "active",
       },
     });
+
+  useEffect(() => {
+    if (post) {
+      reset({
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        status: post.status,
+      });
+      setValue("slug", slugTransform(post.title), { shouldValidate: true });
+    }
+  }, [post, reset]);
+
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
@@ -107,7 +121,7 @@ const PostForm = ({ post }) => {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteServices.getFilePreviewWIthId(post.featuredImage)}
+              src={appwriteServices.getFilePreviewWIthId(post?.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
