@@ -3,8 +3,9 @@ import { Container, PostCard } from "../components";
 import appwriteServices from "../appwrite/config";
 const Home = () => {
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
-    appwriteServices.getAllActivePosts("active").then((posts) => {
+    appwriteServices.getAllPosts("active").then((posts) => {
       if (posts) {
         setPosts(posts);
       }

@@ -27,7 +27,7 @@ export class Service{
         }
     }
 
-    async updatePost(slug,{title,content,featuredImage,status,userId}){
+    async updatePost(slug,{title,content,featuredImage,status}){
        try {
         return await this.databases.updateDocument(
             config.appwriteDatabaseId,
@@ -66,12 +66,19 @@ export class Service{
         }
     }
 
-    async getAllActivePosts(statusQuery){
+    async getAllPosts(statusQuery,userId){
         try {
+            const queries = []
+            if (statusActiveQuery) {
+                queries.push(Query.equal("status",statusQuery))
+            }
+            if (userId) {
+                queries.push( Query.equal("userId",userId))
+            }
             return this.databases.listDocuments(
                 config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-             [Query.equal("status",statusQuery)]
+                config.appwriteCollectionId,  
+                queries         
             )
         } catch (error) {
         console.log("error getting active posts : ", error)   
