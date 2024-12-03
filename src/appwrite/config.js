@@ -69,7 +69,7 @@ export class Service{
     async getAllPosts(statusQuery,userId){
         try {
             const queries = []
-            if (statusQuery==="") {
+            if (statusQuery==="active") {
                 queries.push(Query.equal("status",statusQuery))
             }
             if (userId) {

@@ -7,7 +7,7 @@ const AllPosts = () => {
   // const [userData, setUserData] = useState({});
   const userData = useSelector((state) => state.auth.userData);
   useEffect(() => {
-    appwriteService.getAllPosts("active", userData.$id).then((res) => {
+    appwriteService.getAllPosts("", userData.$id).then((res) => {
       if (res && res.documents) {
         setPosts(res.documents);
       }
