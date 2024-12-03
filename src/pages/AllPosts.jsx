@@ -4,7 +4,7 @@ import appwriteService from "../appwrite/config";
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    appwriteService.getAllActivePosts().then((res) => {
+    appwriteService.getAllActivePosts("inactive").then((res) => {
       if (res && res.documents) {
         setPosts(res.documents);
       }

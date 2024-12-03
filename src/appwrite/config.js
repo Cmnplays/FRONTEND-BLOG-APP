@@ -66,12 +66,12 @@ export class Service{
         }
     }
 
-    async getAllActivePosts(queries=[Query.equal("status","active")]){
+    async getAllActivePosts(statusQuery){
         try {
             return this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                queries//or [Query.equal("status","active")],
+             [Query.equal("status",statusQuery)]
             )
         } catch (error) {
         console.log("error getting active posts : ", error)   

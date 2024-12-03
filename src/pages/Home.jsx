@@ -4,7 +4,7 @@ import appwriteServices from "../appwrite/config";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    appwriteServices.getAllActivePosts().then((posts) => {
+    appwriteServices.getAllActivePosts("active").then((posts) => {
       if (posts) {
         setPosts(posts);
       }
