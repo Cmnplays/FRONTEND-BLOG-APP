@@ -18,7 +18,7 @@ const Home = () => {
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
               <h1 className="text-2xl font-bold hover:text-gray-500">
-                Login to read posts
+                No posts yet!
               </h1>
             </div>
           </div>
@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="w-full py-8">
       <Container>
-        <div className="flex flex-wrap">
+        <div className="flex">
           {posts.documents.map((post) => (
             <div key={post.$id} className="py-4">
               <PostCard {...post} />
