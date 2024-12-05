@@ -5,7 +5,6 @@ import appwriteServices from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const PostForm = ({ post }) => {
-  console.log(post);
   const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
       defaultValues: {
@@ -30,6 +29,7 @@ const PostForm = ({ post }) => {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
+  console.log(userData);
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
