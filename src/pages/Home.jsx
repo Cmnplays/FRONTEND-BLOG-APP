@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="w-full py-8">
       <Container>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {posts.documents.map((post) => (
             <div key={post.$id} className="py-4">
               <PostCard {...post} />
