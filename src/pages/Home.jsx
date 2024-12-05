@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import appwriteServices from "../appwrite/config";
+import { useSelector } from "react-redux";
 const Home = () => {
   const [posts, setPosts] = useState([]);
-
+  const user = useSelector((state) => state.auth.userData);
   useEffect(() => {
     appwriteServices.getAllPosts("active").then((posts) => {
       if (posts) {
@@ -11,6 +12,7 @@ const Home = () => {
       }
     });
   }, []);
+
   if (posts.length === 0) {
     return (
       <div className="w-full py-8 mt-4 text-center">
@@ -18,7 +20,9 @@ const Home = () => {
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
               <h1 className="text-2xl font-bold hover:text-gray-500">
-                No posts yet!
+                {user
+                  ? "No posts yet!"
+                  : "Please register or login to read posts"}
               </h1>
             </div>
           </div>
