@@ -11,13 +11,15 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const create = async (data) => {
+    setError("");
     try {
-      console.log(data);
-      const userData = await authService.createAccount({ ...data });
-      console.log(userData);
-      if (userData) {
-        dispatch(login(userData));
-        navigate("/");
+      const session = await authService.createAccount({ ...data });
+      if (session) {
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          dispatch(login(userData));
+          navigate("/");
+        }
       }
     } catch (error) {
       setError(error.message);
