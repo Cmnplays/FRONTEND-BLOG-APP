@@ -14,9 +14,9 @@ export class AuthService{
     async createAccount({email, password, name}){
         try {
            const userAccount = await this.account.create(ID.unique(),email,password,name)
+           console.log(userAccount)
            if(userAccount){
-                //call another method kike login
-                this.login(email,password)
+                this.login({email,password})
            }else{
                 return userAccount;
            }

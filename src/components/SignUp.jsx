@@ -13,7 +13,7 @@ const SignUp = () => {
   const create = async (data) => {
     try {
       console.log(data);
-      const userData = await authService.createAccount(data);
+      const userData = await authService.createAccount({ ...data });
       console.log(userData);
       if (userData) {
         dispatch(login(userData));
@@ -64,7 +64,7 @@ const SignUp = () => {
               validate: {
                 matchPattern: (value) =>
                   /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Email address must be a valid adddress",
+                  "Email address must be a valid address",
               },
             })}
           />
