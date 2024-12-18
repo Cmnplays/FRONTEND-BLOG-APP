@@ -4,24 +4,35 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Header, Footer } from "./components";
 import { Outlet } from "react-router-dom";
+import databaseService from "./appwrite/config.js";
+import { setPosts, unsetPosts } from "./store/postSlice";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    authService
-      .getCurrentUser()
-      .then((userData) => {
+    async function initializeApp() {
+      try {
+        const userData = await authService.getCurrentUser();
         if (userData) {
           dispatch(login({ userData }));
+          const posts = await databaseService.getAllPosts("", userData.$id);
+          dispatch(setPosts(posts));
         } else {
           dispatch(logout());
+          dispatch(unsetPosts());
         }
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error({
+          status: 500,
+          message: error.message,
+        });
+      } finally {
         setLoading(false);
-      });
+      }
+    }
+    initializeApp();
   }, []);
 
   return !loading ? (

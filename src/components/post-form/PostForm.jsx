@@ -2,8 +2,9 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import appwriteServices from "../../appwrite/config";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addPost } from "../../store/postSlice";
 const PostForm = ({ post }) => {
   const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
@@ -54,6 +55,7 @@ const PostForm = ({ post }) => {
           userId: userData?.$id,
         });
         if (dbPost) {
+          useDispatch(addPost(dbPost));
           navigate(`/post/${dbPost.$id}`);
         }
       }
