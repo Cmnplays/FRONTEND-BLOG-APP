@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, PostCard } from "../components";
-import appwriteServices from "../appwrite/config";
 import { useSelector } from "react-redux";
 const Home = () => {
   const user = useSelector((state) => state.auth.userData);
   const posts = useSelector((state) => state.post.posts);
-
   if (user) {
-    if (posts.length > 0) {
+    if (posts?.length > 0) {
       return (
         <div className="w-full py-8">
           <Container>
             <div className="flex flex-wrap gap-5">
-              {posts.documents.map((post) => (
+              {posts.map((post) => (
                 <div key={post.$id} className="py-4">
                   <PostCard {...post} />
                 </div>
@@ -37,7 +35,19 @@ const Home = () => {
       );
     }
   } else {
-    return <div>Please register or login to read posts</div>;
+    return (
+      <div className="w-full py-8 mt-4 text-center">
+        <Container>
+          <div className="flex flex-wrap">
+            <div className="p-2 w-full">
+              <h1 className="text-2xl font-bold hover:text-gray-500">
+                Please login or register to continue!
+              </h1>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
   }
 };
 

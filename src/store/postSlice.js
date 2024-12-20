@@ -11,11 +11,8 @@ const initialState={
         setPosts: (state, action)=>{
            state.posts = action.payload
         },
-        getPostWithId:(state, action)=>{
-            return state.posts.filter((post)=>post.featuredImage === action.payload.featuredImage )
-        },
         unsetPosts:(state)=>{
-            state.posts=undefined
+            state.posts=[]
         },
         addPost: (state,action)=>{
             state.posts.push(action.payload.post)

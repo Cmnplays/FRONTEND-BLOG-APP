@@ -17,22 +17,22 @@ const App = () => {
         const userData = await authService.getCurrentUser();
         if (userData) {
           dispatch(login({ userData }));
-          const posts = await databaseService.getAllPosts("", userData.$id);
-          dispatch(setPosts(posts));
+          const posts = await databaseService.getAllPosts();
+          dispatch(setPosts(posts.documents));
         } else {
           dispatch(logout());
           dispatch(unsetPosts());
         }
       } catch (error) {
         console.error({
-          status: 500,
+          error,
           message: error.message,
         });
       } finally {
         setLoading(false);
       }
     }
-    initializeApp();
+    initializeApp(dispatch);
   }, []);
 
   return !loading ? (

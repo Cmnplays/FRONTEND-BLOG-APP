@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
 import { PostCard, Container } from "../components";
-import appwriteService from "../appwrite/config";
 import { useSelector } from "react-redux";
 const AllPosts = () => {
   const userData = useSelector((state) => state.auth.userData);
-  const posts = useSelector((state) => state.post.posts.$id === userData.$id);
-  if (posts.length > 0) {
+  const allPosts = useSelector((state) =>
+    state.post.posts.filter((item) => item.userId === userData?.$id)
+  );
+  if (allPosts.length > 0) {
     return (
       <div className="w-full py-8">
         <Container>
           <div className="flex flex-wrap">
-            {posts?.map((post) => (
+            {allPosts.map((post) => (
               <div key={post.$id} className="py-4">
                 <PostCard {...post} />
               </div>

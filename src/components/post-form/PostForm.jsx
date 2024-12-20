@@ -27,7 +27,7 @@ const PostForm = ({ post }) => {
       setValue("slug", slugTransform(post.title), { shouldValidate: true });
     }
   }, [post, reset]);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
@@ -43,6 +43,7 @@ const PostForm = ({ post }) => {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
+      console.log(dbPost);
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
@@ -55,7 +56,7 @@ const PostForm = ({ post }) => {
           userId: userData?.$id,
         });
         if (dbPost) {
-          useDispatch(addPost(dbPost));
+          dispatch(addPost(dbPost));
           navigate(`/post/${dbPost.$id}`);
         }
       }
