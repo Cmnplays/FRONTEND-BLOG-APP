@@ -3,15 +3,9 @@ import { Container, PostCard } from "../components";
 import appwriteServices from "../appwrite/config";
 import { useSelector } from "react-redux";
 const Home = () => {
-  const [posts, setPosts] = useState([]);
   const user = useSelector((state) => state.auth.userData);
-  useEffect(() => {
-    appwriteServices.getAllPosts("active").then((posts) => {
-      if (posts) {
-        setPosts(posts);
-      }
-    });
-  }, []);
+  const posts = useSelector((state) => state.post.posts);
+
   if (user) {
     if (posts.length > 0) {
       return (
