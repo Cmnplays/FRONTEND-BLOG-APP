@@ -12,4 +12,5 @@ import SignUp from "./SignUp";
 import PostForm from "./post-form/PostForm";
 import AuthLayout from "./AuthLayout"
 import Login from "./Login";
-export {Header,Footer,Container,Logo,LogOutBtn,Button, Input,Select,PostCard,RTE,AuthLayout,SignUp,PostForm,Login} 
+import LoadingButton from "./LoadingButton";
+export {Header,Footer,Container,Logo,LogOutBtn,Button, Input,Select,PostCard,RTE,AuthLayout,SignUp,PostForm,Login,LoadingButton} 

@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import appwriteServices from "../../appwrite/config";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../../store/postSlice";
+import { LoadingButton } from "../index.js";
+
 const PostForm = ({ post }) => {
   const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
@@ -27,10 +29,12 @@ const PostForm = ({ post }) => {
       setValue("slug", slugTransform(post.title), { shouldValidate: true });
     }
   }, [post, reset]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
+    setLoading(true);
     if (post) {
       const file = data.image[0]
         ? appwriteServices.uploadFile(data.image)
@@ -43,9 +47,9 @@ const PostForm = ({ post }) => {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
-      console.log(dbPost);
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
+        setLoading(true);
       }
     } else {
       const file = await appwriteServices.uploadFile(data.image[0]);
@@ -56,6 +60,7 @@ const PostForm = ({ post }) => {
           userId: userData?.$id,
         });
         if (dbPost) {
+          setLoading(true);
           dispatch(addPost(dbPost));
           navigate(`/post/${dbPost.$id}`);
         }
@@ -142,6 +147,7 @@ const PostForm = ({ post }) => {
         >
           {post ? "Update" : "Submit"}
         </Button>
+        <LoadingButton loading={loading} />
       </div>
     </form>
   );

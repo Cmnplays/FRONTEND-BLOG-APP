@@ -5,23 +5,29 @@ import authService from "../appwrite/auth";
 import { login } from "../store/authSlice";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { LoadingButton } from "./index.js";
+
 const SignUp = () => {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const create = async (data) => {
     setError("");
+    setLoading(true);
     try {
       const session = await authService.createAccount({ ...data });
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
+          setLoading(false);
           dispatch(login(userData));
           navigate("/");
         }
       }
     } catch (error) {
+      setLoading(false);
       setError(error.message);
     }
   };
@@ -83,6 +89,7 @@ const SignUp = () => {
           <Button type="submit" className="w-full mt-2">
             Create Account
           </Button>
+          <LoadingButton loading={loading} />
         </form>
       </div>
     </div>

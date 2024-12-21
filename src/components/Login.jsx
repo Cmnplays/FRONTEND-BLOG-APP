@@ -5,13 +5,16 @@ import { Button, Input, Logo } from "./index";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
+import { LoadingButton } from "./index";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const login = async (data) => {
     setError("");
+    setLoading(true);
     try {
       const session = await authService.login(data);
       if (session) {
@@ -22,7 +25,10 @@ const Login = () => {
         }
       }
     } catch (error) {
+      setLoading(false);
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -74,6 +80,7 @@ const Login = () => {
             <Button type="submit" className="w-full">
               Sign In
             </Button>
+            <LoadingButton loading={loading} />
           </div>
         </form>
       </div>
