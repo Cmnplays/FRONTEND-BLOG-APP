@@ -2,5 +2,5 @@
     i, I need to refresh the home page
     ii, I need to go to another page from home page
 
-2. When i create a post then i get redirected to the home page but after that if i click on the my posts page then it says
+2. When i create a post then i get redirected to the see post page but after that if i click on the my posts page then it says
    that Id is undefined but when i refresh then it works finely.
