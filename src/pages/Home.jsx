@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 const Home = () => {
@@ -16,14 +15,15 @@ const Home = () => {
   // console.log({ user, posts });
   const user = useSelector((state) => state.auth.userData);
   const posts = useSelector((state) => state.post.posts);
+  console.log({ posts });
   if (user) {
     if (posts?.length > 0) {
       return (
         <div className="w-full py-8">
           <Container>
             <div className="flex flex-wrap gap-5">
-              {posts.map((post) => (
-                <div key={post.$id} className="py-4">
+              {posts.map((post, index) => (
+                <div key={index} className="py-4">
                   <PostCard {...post} />
                 </div>
               ))}

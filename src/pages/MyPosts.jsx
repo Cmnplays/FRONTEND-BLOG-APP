@@ -2,16 +2,20 @@ import { PostCard, Container } from "../components";
 import { useSelector } from "react-redux";
 const AllPosts = () => {
   const userData = useSelector((state) => state.auth.userData);
-  const allPosts = useSelector((state) =>
-    state.post.posts.filter((item) => item.userId === userData?.$id)
-  );
+  const allPosts = useSelector((state) => state.post.posts);
+  console.log({ userData });
+  console.log({ allPosts });
+  console.log({ lastPost: allPosts[allPosts.length - 1] });
+
+  const filteredPosts = allPosts.filter((item) => item);
+  console.log({ filteredPosts });
   if (allPosts.length > 0) {
     return (
       <div className="w-full py-8">
         <Container>
           <div className="flex flex-wrap">
-            {allPosts.map((post) => (
-              <div key={post.$id} className="py-4">
+            {allPosts.map((post, index) => (
+              <div key={index} className="py-4">
                 <PostCard {...post} />
               </div>
             ))}

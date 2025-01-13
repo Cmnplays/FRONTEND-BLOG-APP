@@ -31,7 +31,7 @@ const App = () => {
       } catch (error) {
         console.error({
           error,
-          message: error.message,
+          message: error.message
         });
       } finally {
         setLoading(false);

@@ -65,8 +65,8 @@ const Login = () => {
                 validate: {
                   matchPattern: (value) =>
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    "Email address must be a valid adddress",
-                },
+                    "Email address must be a valid adddress"
+                }
               })}
             />
             <Input
@@ -74,7 +74,7 @@ const Login = () => {
               placeholder="Enter Your Password"
               type="password"
               {...register("password", {
-                required: true,
+                required: true
               })}
             />
             <Button type="submit" className="w-full">

@@ -12,28 +12,28 @@ const Header = () => {
     {
       name: "Home",
       slug: "/",
-      active: true,
+      active: true
     },
     {
       name: "Login",
       slug: "/login",
-      active: !authStatus,
+      active: !authStatus
     },
     {
       name: "Signup",
       slug: "/signup",
-      active: !authStatus,
+      active: !authStatus
     },
     {
       name: "My Posts",
       slug: "/my-posts",
-      active: authStatus,
+      active: authStatus
     },
     {
       name: "Add Post",
       slug: "/add-post",
-      active: authStatus,
-    },
+      active: authStatus
+    }
   ];
   return (
     <header className="py-3 shadow bg-gray-500">

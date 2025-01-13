@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import appwriteServices from "../../appwrite/config";
@@ -14,8 +14,8 @@ const PostForm = ({ post }) => {
         title: post?.title || "",
         slug: post?.slug || "",
         content: post?.content || "",
-        status: post?.status || "active",
-      },
+        status: post?.status || "active"
+      }
     });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const PostForm = ({ post }) => {
         title: post.title,
         slug: post.slug,
         content: post.content,
-        status: post.status,
+        status: post.status
       });
       setValue("slug", slugTransform(post.title), { shouldValidate: true });
     }
@@ -45,7 +45,7 @@ const PostForm = ({ post }) => {
       }
       const dbPost = await appwriteServices.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
+        featuredImage: file ? file.$id : undefined
       });
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
@@ -57,9 +57,10 @@ const PostForm = ({ post }) => {
         data.featuredImage = file.$id;
         const dbPost = await appwriteServices.createPost({
           ...data,
-          userId: userData?.$id,
+          userId: userData?.$id
         });
         if (dbPost) {
+          console.log("dispatching the post");
           setLoading(true);
           dispatch(addPost(dbPost));
           navigate(`/post/${dbPost.$id}`);
@@ -106,7 +107,7 @@ const PostForm = ({ post }) => {
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
+              shouldValidate: true
             });
           }}
         />

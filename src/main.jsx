@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />
       },
       {
         path: "/login",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
           <AuthLayout authentication={false}>
             <Login />
           </AuthLayout>
-        ),
+        )
       },
       {
         path: "/signup",
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
           <AuthLayout authentication={false}>
             <SignUp />
           </AuthLayout>
-        ),
+        )
       },
       {
         path: "/my-posts",
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
             {" "}
             <MyPosts />
           </AuthLayout>
-        ),
+        )
       },
       {
         path: "/add-post",
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
           <AuthLayout authentication>
             <AddPost />
           </AuthLayout>
-        ),
+        )
       },
       {
         path: "/edit-post/:slug",
@@ -61,14 +61,14 @@ const router = createBrowserRouter([
           <AuthLayout authentication>
             <EditPost />
           </AuthLayout>
-        ),
+        )
       },
       {
         path: "/post/:slug",
-        element: <Post />,
-      },
-    ],
-  },
+        element: <Post />
+      }
+    ]
+  }
 ]);
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>

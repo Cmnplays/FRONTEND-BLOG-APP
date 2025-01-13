@@ -59,7 +59,7 @@ const SignUp = () => {
             label="Full Name: "
             placeholder="Enter Your Full Name"
             {...register("name", {
-              required: true,
+              required: true
             })}
           />
 
@@ -72,8 +72,8 @@ const SignUp = () => {
               validate: {
                 matchPattern: (value) =>
                   /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Email address must be a valid address",
-              },
+                  "Email address must be a valid address"
+              }
             })}
           />
 
@@ -82,7 +82,7 @@ const SignUp = () => {
             placeholder="Enter Your Password"
             type="password"
             {...register("password", {
-              required: true,
+              required: true
             })}
           />
 
