@@ -1,6 +1,4 @@
-1. When i log in i need to do either one of these two things to see any content-:
-    i, I need to refresh the home page
-    ii, I need to go to another page from home page
+1. When i log in i need to refresh the site to see content on home page and my posts page but add post and logout works finely.
 
 2. When i create a post then i get redirected to the see post page but after that if i click on either home page or my posts page then it says
    that $Id is undefined but when i refresh then it works finely.
