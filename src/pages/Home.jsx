@@ -11,7 +11,7 @@ const Home = () => {
         setPosts(posts);
       }
     });
-  }, []);
+  }, [user]);
   console.log({ posts });
   5;
   console.log({ user });
