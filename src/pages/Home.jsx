@@ -12,14 +12,18 @@ const Home = () => {
       }
     });
   }, []);
+  console.log({ posts });
+  5;
+  console.log({ user });
   if (user) {
-    if (posts.length > 0) {
+    console.log("first condition fulfilled");
+    if (posts?.documents?.length > 0) {
       return (
         <div className="w-full py-8">
           <Container>
             <div className="flex flex-wrap gap-5">
-              {posts.documents.map((post) => (
-                <div key={post.$id} className="py-4">
+              {posts.documents.map((post, index) => (
+                <div key={index} className="py-4">
                   <PostCard {...post} />
                 </div>
               ))}
