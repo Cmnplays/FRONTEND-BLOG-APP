@@ -11,7 +11,7 @@ const AllPosts = () => {
         setPosts(res.documents);
       }
     });
-  }, []);
+  }, [userData]);
   if (posts.length > 0) {
     return (
       <div className="w-full py-8">
