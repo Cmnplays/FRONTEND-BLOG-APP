@@ -2,3 +2,6 @@
 
 2. When i create a post then i get redirected to the see post page but after that if i click on either home page or my posts page then it says
    that $Id is undefined but when i refresh then it works finely.
+
+3.DETAILED INFOR FOR PROBLEM 2: 
+  WHEN I CREATE A POST THEN I GET REDIRECTED TO SEE SINGLE POST PAGE. AFTER THAT I FIGURED OUT THAT MY NEW POST IS NOT BEING ADDED TO THE POSTS ARRAY UNTIL I REFRESH THE PAGE. IF I DONT REFRESH THE POST THEN I GET THE NEW POST AS UNDEFINED ON OTHER PAGES BECAUSE OF WHICH IF I LOOP OR FILTER THAT DATA THEN I GET ERROR 
