@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import appwriteServices from "../appwrite/config";
 import { useSelector } from "react-redux";
@@ -13,7 +13,6 @@ const Home = () => {
     });
   }, [user]);
   console.log({ posts });
-  5;
   console.log({ user });
   if (user) {
     console.log("first condition fulfilled");
