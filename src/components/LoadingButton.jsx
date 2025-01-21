@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingButton = ({ loading }) => {
   return (
     <div className="flex justify-center items-center w-full h-full">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Input, Logo } from "./index";
 import authService from "../appwrite/auth";

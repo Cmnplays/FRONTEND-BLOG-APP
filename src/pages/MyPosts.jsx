@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 const AllPosts = () => {
   const userData = useSelector((state) => state.auth.userData);
   const allPosts = useSelector((state) => state.post.posts);
-
   const filteredPosts = allPosts.filter((item) => item.userId === userData.$id);
   console.log({ filteredPosts,userData });
   if (allPosts.length > 0) {

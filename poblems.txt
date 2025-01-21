@@ -5,3 +5,8 @@
 
 3.DETAILED INFOR FOR PROBLEM 2: 
   WHEN I CREATE A POST THEN I GET REDIRECTED TO SEE SINGLE POST PAGE. AFTER THAT I FIGURED OUT THAT MY NEW POST IS NOT BEING ADDED TO THE POSTS ARRAY UNTIL I REFRESH THE PAGE. IF I DONT REFRESH THE POST THEN I GET THE NEW POST AS UNDEFINED ON OTHER PAGES BECAUSE OF WHICH IF I LOOP OR FILTER THAT DATA THEN I GET ERROR 
+
+
+  SOLVED::I WAS ADDING A OBJ USERDATA IN STORE BY STORING IT INSIDE A OBJ LIKE THIS(dispatch({userData(which is also a obj)})) and i used to store userData as state.auth.userData but because of storing it like this i had to do state.auth.userData.userData because i mistakenly added a extra obj layer outside the user object.
+
+  there is still is a error saying props are  not in props validator ( i need to study whats that and eslint is giving that error but everything is working finely)

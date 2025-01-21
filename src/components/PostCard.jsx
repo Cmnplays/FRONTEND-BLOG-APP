@@ -1,4 +1,3 @@
-import React from "react";
 import dataBaseServices from "../appwrite/config";
 import { Link } from "react-router-dom";
 const PostCard = ({ $id, title, featuredImage }) => {
