@@ -5,17 +5,45 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const user = useSelector((state) => state.auth.userData);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    appwriteServices.getAllPosts("active").then((posts) => {
-      if (posts) {
-        setPosts(posts);
-      }
-    });
+    appwriteServices
+      .getAllPosts("active")
+      .then((posts) => {
+        if (posts) {
+          setPosts(posts);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [user]);
-  console.log({ posts });
-  console.log({ user });
+
+  if (loading) {
+    return (
+      <div className="w-full py-8 mt-4 text-center">
+        <Container>
+          <h1 className="text-2xl font-bold">Loading...</h1>
+        </Container>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="w-full py-8 mt-4 text-center">
+        <Container>
+          <h1 className="text-2xl font-bold text-red-500">{error.message}</h1>
+        </Container>
+      </div>
+    );
+  }
   if (user) {
-    console.log("first condition fulfilled");
+    console.log(posts);
     if (posts?.documents?.length > 0) {
       return (
         <div className="w-full py-8">
@@ -46,7 +74,19 @@ const Home = () => {
       );
     }
   } else {
-    return <div>Please register or login to read posts</div>;
+    return (
+      <div className="w-full py-8 mt-4 text-center">
+        <Container>
+          <div className="flex flex-wrap">
+            <div className="p-2 w-full">
+              <h1 className="text-2xl font-bold hover:text-gray-500">
+                Please register or login to read posts
+              </h1>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
   }
 };
 
