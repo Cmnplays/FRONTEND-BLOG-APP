@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
@@ -18,7 +18,7 @@ const App = () => {
       try {
         const userData = await authService.getCurrentUser();
         if (userData) {
-          dispatch(login({ userData }));
+          dispatch(login(userData));
           dispatch(setUserLoading(false));
           dispatch(setPostLoading(true));
           const posts = await databaseService.getAllPosts();
