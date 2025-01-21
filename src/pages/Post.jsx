@@ -4,7 +4,7 @@ import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "../store/postSlice.js";
+import {deletePost as deletePostFromRtk} from "../store/postSlice.js";
 export default function Post() {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
@@ -23,11 +23,12 @@ export default function Post() {
   }, [slug, navigate]);
 
   const deletePost = () => {
-    appwriteService.deletePost(post.$id).then((status) => {
+    appwriteService.deletePost(post.$id).then( async (status) => {
       if (status) {
-        appwriteService.deleteFile(post.featuredImage);
-        dispatch(deletePost(post));
-        navigate("/");
+       const deleteImgRes = await appwriteService.deleteFile(post.featuredImage);
+       if(deleteImgRes){
+        dispatch(deletePostFromRtk(post));
+        navigate("/");}
       }
     });
   };

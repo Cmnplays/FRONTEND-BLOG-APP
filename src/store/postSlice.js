@@ -15,11 +15,11 @@ const postSlice = createSlice({
       state.posts = [];
     },
     addPost: (state, action) => {
-      state.posts.push(action.payload.post);
+      state.posts.push(action.payload);
     },
     deletePost: (state, action) => {
       state.posts = state.posts.filter(
-        (post) => post.featuredImage !== action.payload.post.featuredImage
+        (post) => post.featuredImage !== action.payload.featuredImage
       );
     },
     setPostLoading: (state, action) => {

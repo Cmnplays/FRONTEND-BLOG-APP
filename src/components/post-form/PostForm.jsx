@@ -54,17 +54,20 @@ const PostForm = ({ post }) => {
     } else {
       const file = await appwriteServices.uploadFile(data.image[0]);
       if (file) {
-        data.featuredImage = file.$id;
-        const dbPost = await appwriteServices.createPost({
-          ...data,
-          userId: userData?.$id
-        });
-        if (dbPost) {
-          console.log("dispatching the post");
-          setLoading(true);
-          dispatch(addPost(dbPost));
-          navigate(`/post/${dbPost.$id}`);
+        try {
+          data.featuredImage = file.$id;
+          const dbPost = await appwriteServices.createPost({
+            ...data,
+            userId: userData?.$id
+          });
+          if (dbPost) {
+            setLoading(true);
+            dispatch(addPost(dbPost));
+            navigate(`/post/${dbPost.$id}`);
+        }} catch (error) {
+          console.log(error);
         }
+        
       }
     }
   };

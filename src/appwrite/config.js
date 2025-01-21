@@ -29,6 +29,7 @@ export class Service {
       );
     } catch (error) {
       console.log("create post error:", error);
+      throw new Error(error);
     }
   }
 
@@ -114,7 +115,6 @@ export class Service {
 
   getFilePreviewWIthId(fileId) {
     try {
-      console.log("file id is", fileId);
       return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
     } catch (error) {
       console.log("error previewing file : ", error);

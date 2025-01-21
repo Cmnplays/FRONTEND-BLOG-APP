@@ -4,7 +4,6 @@ const AllPosts = () => {
   const userData = useSelector((state) => state.auth.userData);
   const allPosts = useSelector((state) => state.post.posts);
   const filteredPosts = allPosts.filter((item) => item.userId === userData.$id);
-  console.log({ filteredPosts,userData });
   if (allPosts.length > 0) {
     return (
       <div className="w-full py-8">
