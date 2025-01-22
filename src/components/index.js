@@ -13,6 +13,7 @@ import PostForm from "./post-form/PostForm";
 import AuthLayout from "./AuthLayout";
 import Login from "./Login";
 import LoadingButton from "./LoadingButton";
+import ErrorComp from "./ErrorDisplayer";
 export {
   Header,
   Footer,
@@ -28,5 +29,6 @@ export {
   SignUp,
   PostForm,
   Login,
-  LoadingButton
+  LoadingButton,
+  ErrorComp
 };

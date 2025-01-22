@@ -6,8 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../../store/postSlice";
 import { LoadingButton } from "../index.js";
+import {ErrorComp} from "../index.js";
 
 const PostForm = ({ post }) => {
+  const [error, setError] = useState(null);
+  const throwError = (error) => {
+    setError(error);
+  }
+  const closeError = () => {
+    setError(null);
+  }  
   const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
       defaultValues: {
