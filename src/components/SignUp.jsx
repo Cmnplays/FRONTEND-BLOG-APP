@@ -10,22 +10,26 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState(false);
   const create = async (data) => {
     setError("");
+    setLoading(true);
     try {
       const session = await authService.createAccount({ ...data });
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
           dispatch(login(userData));
+          setLoading(false);
           navigate("/");
         }
       }
     } catch (error) {
+      setLoading(false);
       setError(error.message);
     }
   };
-  return (
+  return !loading ? (
     <div className="flex items-center justify-center">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
@@ -85,6 +89,10 @@ const SignUp = () => {
           </Button>
         </form>
       </div>
+    </div>
+  ) : (
+    <div className="w-screen h-screen flex justify-center items-center bg-black">
+      <h1 className="text-white text-2xl">Loading...</h1>
     </div>
   );
 };

@@ -11,7 +11,9 @@ const PostCard = ({ $id, title, featuredImage }) => {
             alt={title}
             className="rounded-xl"
           />
-          <h2 className="text-2xl font-bold">{title}</h2>
+          <div>
+            <h2 className="text-2xl font-bold">{title}</h2>
+          </div>
         </div>
       </div>
     </Link>

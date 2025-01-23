@@ -1,9 +1,12 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import appwriteServices from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addPost } from "../../store/postSlice";
+import { updatePost } from "../../store/postSlice";
 const PostForm = ({ post }) => {
   const { register, reset, handleSubmit, setValue, watch, control, getValues } =
     useForm({
@@ -26,11 +29,13 @@ const PostForm = ({ post }) => {
       setValue("slug", slugTransform(post.title), { shouldValidate: true });
     }
   }, [post, reset]);
-
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
     if (post) {
+      setLoading(true);
       const file = data.image[0]
         ? appwriteServices.uploadFile(data.image)
         : null;
@@ -43,9 +48,12 @@ const PostForm = ({ post }) => {
         featuredImage: file ? file.$id : undefined,
       });
       if (dbPost) {
+        dispatch(updatePost(dbPost));
+        setLoading(false);
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
+      setLoading(true);
       const file = await appwriteServices.uploadFile(data.image[0]);
       if (file) {
         data.featuredImage = file.$id;
@@ -54,6 +62,8 @@ const PostForm = ({ post }) => {
           userId: userData?.$id,
         });
         if (dbPost) {
+          dispatch(addPost(dbPost));
+          setLoading(false);
           navigate(`/post/${dbPost.$id}`);
         }
       }
@@ -82,7 +92,7 @@ const PostForm = ({ post }) => {
     };
   }, [watch, slugTransform, setValue]);
 
-  return (
+  return !loading ? (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
@@ -141,6 +151,10 @@ const PostForm = ({ post }) => {
         </Button>
       </div>
     </form>
+  ) : (
+    <div className="w-screen h-screen flex justify-center items-center bg-black">
+      <h1 className="text-white text-2xl">Loading...</h1>
+    </div>
   );
 };
 

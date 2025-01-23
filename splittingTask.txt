@@ -1,5 +1,10 @@
 TASK: to change this project to use full react tool kit.
 STEPS: 
-    1.ADD POSTSLICE.JS LOGIC
-    2.ADD POSTSLICE'S POST TO STORE IN STORE.JS
-    3.ADD SETTING POSTS IN APP.JSX
+    1.ADD POSTSLICE.JS LOGIC(done)
+    2.ADD POSTSLICE'S POST TO STORE IN STORE.JS(done)
+    3.fetch posts and store in post slice in app.jsx(done)
+    4.add rtk logic for posts in home page(done)
+    5.add rtk logic for posts in my posts page(done)
+    6.add rtk logic for post.jsx page(done)    
+    7.add rtk logic for add post.jsx  page(done)
+    8.lastly, fix signup
