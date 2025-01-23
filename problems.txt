@@ -1,1 +1,0 @@
-1.When i log in to my project i need to refresh page manually to see new content

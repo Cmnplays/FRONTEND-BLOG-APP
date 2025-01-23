@@ -1,0 +1,5 @@
+TASK: to change this project to use full react tool kit.
+STEPS: 
+    1.ADD POSTSLICE.JS LOGIC
+    2.ADD POSTSLICE'S POST TO STORE IN STORE.JS
+    3.ADD SETTING POSTS IN APP.JSX
