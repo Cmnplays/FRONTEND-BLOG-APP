@@ -5,27 +5,37 @@ import { Button, Input, Logo } from "./index";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth.js";
+import databaseService from "../appwrite/config.js";
+import { getPosts } from "../store/postSlice.js";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const login = async (data) => {
     setError("");
     try {
+      setLoading(true);
       const session = await authService.login(data);
       if (session) {
         const userData = await authService.getCurrentUser();
-        if (userData) {
+        const posts = await databaseService.getAllPosts("active", "");
+        console.log(userData);
+        if (userData && posts.documents.length >= 0) {
           dispatch(storeLogin(userData));
+          dispatch(getPosts(posts.documents));
+          setLoading(false);
           navigate("/");
         }
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
-  return (
+  return !loading ? (
     <div className="flex items-center justify-center w-full">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
@@ -77,6 +87,10 @@ const Login = () => {
           </div>
         </form>
       </div>
+    </div>
+  ) : (
+    <div className="w-screen h-screen flex justify-center items-center bg-black">
+      <h1 className="text-white text-2xl">Loading...</h1>
     </div>
   );
 };

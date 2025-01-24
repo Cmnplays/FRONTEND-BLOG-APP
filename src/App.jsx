@@ -8,18 +8,20 @@ import { getPosts } from "./store/postSlice";
 import databaseService from "./appwrite/config";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setLoading(true);
     authService
       .getCurrentUser()
       .then((userData) => {
         if (userData) {
           dispatch(login(userData));
-          databaseService.getAllPosts("active").then((posts) => {
+          databaseService.getAllPosts("active", "").then((posts) => {
             if (posts) {
               dispatch(getPosts(posts.documents));
+              setLoading(false);
             }
           });
         } else {
